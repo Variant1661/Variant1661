@@ -3,3 +3,4 @@ out/
 build/
 *.mp4
 *.wav
+!voice/voice.wav
