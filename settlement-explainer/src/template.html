@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Settlement Was Never Automatic</title>
+<style>
+:root{
+  --navy:#0E1C36; --navy2:#16294B; --navy3:#22395F; --line:#3A5480;
+  --white:#F6F1E6; --muted:#A9B3C6; --amber:#E8A53A; --amber2:#F3C778;
+  --serif: "Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+  --sans: "Inter","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#060c18;color:var(--white);font-family:var(--sans);overflow:hidden}
+#wrap{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+#stage{position:absolute;left:0;top:0;width:1080px;height:1920px;background:var(--navy);overflow:hidden;transform-origin:0 0}
+.abs{position:absolute}
+.serif{font-family:var(--serif)}
+.amber{color:var(--amber)}
+.muted{color:var(--muted)}
+.scene{position:absolute;inset:0;opacity:0}
+.h1{font-family:var(--serif);font-weight:600;font-size:104px;line-height:1.06;letter-spacing:-1px}
+.h2{font-family:var(--serif);font-weight:600;font-size:80px;line-height:1.1;letter-spacing:-.5px}
+.body{font-size:50px;line-height:1.3}
+.label{font-size:38px;line-height:1.3}
+.small{font-size:31px;line-height:1.35;color:var(--muted)}
+.chip{display:inline-block;border:3px solid var(--amber);color:var(--amber2);border-radius:999px;padding:14px 30px;font-size:36px;font-weight:600;letter-spacing:.3px}
+.card{background:var(--navy2);border-radius:28px;border:2px solid var(--navy3)}
+svg{overflow:visible}
+/* chrome */
+#brand{left:96px;top:200px;font-size:30px;letter-spacing:4px;text-transform:uppercase;color:var(--muted)}
+#prog{left:96px;right:144px;top:252px;height:6px;background:var(--navy3);border-radius:6px}
+#progfill{height:100%;width:0;background:var(--amber);border-radius:6px}
+#cap{left:96px;right:144px;top:1580px;text-align:center;font-size:42px;line-height:1.3;font-weight:600;display:none}
+#cap span{background:rgba(6,12,24,.82);padding:6px 16px;border-radius:10px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+/* controls (outside stage, never recorded in presentation mode) */
+#ui{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);display:flex;gap:8px;flex-wrap:wrap;justify-content:center;align-items:center;
+  background:rgba(14,28,54,.92);border:1px solid #2b4268;border-radius:14px;padding:8px 10px;z-index:10;font-size:14px;max-width:calc(100vw - 32px)}
+#ui button,#ui label{background:#1d335a;color:var(--white);border:1px solid #33507f;border-radius:9px;padding:8px 12px;font:600 14px var(--sans);cursor:pointer;white-space:nowrap}
+#ui button:hover{background:#27426f}
+#ui label{display:flex;gap:6px;align-items:center}
+#time{font:600 14px ui-monospace,Menlo,monospace;color:var(--muted);min-width:92px;text-align:center}
+#scrub{width:180px;accent-color:var(--amber)}
+body.present #ui{display:none}
+body.present{cursor:none}
+#hint{position:fixed;top:12px;left:50%;transform:translateX(-50%);background:rgba(14,28,54,.92);border:1px solid #2b4268;color:var(--muted);font:13px var(--sans);padding:6px 12px;border-radius:9px;z-index:10;transition:opacity .6s}
+body.present #hint{opacity:0}
+@media (prefers-reduced-motion: reduce){ #hint{transition:none} }
+</style>
+</head>
+<body>
+<div id="wrap"><div id="stage">
+
+  <div id="brand" class="abs">UK earned settlement</div>
+  <div id="prog" class="abs"><div id="progfill"></div></div>
+
+  <!-- SCENE 1 -->
+  <div class="scene" id="s1">
+    <div class="abs h1" id="s1h" style="left:96px;top:330px;width:860px">Settlement was never <span class="amber">automatic.</span></div>
+    <svg class="abs" id="s1tl" width="1080" height="600" style="left:0;top:690px">
+      <line id="s1line" x1="130" y1="200" x2="910" y2="200" stroke="#A9B3C6" stroke-width="6" stroke-linecap="round"/>
+      <g id="s1ticks"></g>
+    </svg>
+    <div class="abs card" id="s1card" style="left:96px;top:1010px;width:840px;padding:40px 44px">
+      <div class="label muted" style="margin-bottom:22px">What five years actually meant</div>
+      <div style="display:flex;gap:26px;align-items:center;margin-bottom:22px" id="s1r1">
+        <svg width="62" height="62"><rect x="3" y="3" width="56" height="56" rx="12" fill="none" stroke="#E8A53A" stroke-width="5"/><path id="s1chk" d="M15 32 l11 11 l22 -24" fill="none" stroke="#E8A53A" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="60" stroke-dashoffset="60"/></svg>
+        <div class="body">Eligible to <b>apply</b></div>
+      </div>
+      <div style="display:flex;gap:26px;align-items:center" id="s1r2">
+        <svg width="62" height="62"><rect x="3" y="3" width="56" height="56" rx="12" fill="none" stroke="#A9B3C6" stroke-width="5" stroke-dasharray="10 8"/></svg>
+        <div class="body muted">…if the requirements were met</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENE 2 -->
+  <div class="scene" id="s2">
+    <div class="abs h2" style="left:96px;top:330px;width:860px">What we <span class="amber">already</span> had to show</div>
+    <div id="s2list"></div>
+    <div class="abs small" id="s2note" style="left:96px;top:1530px;width:820px">Typical Skilled Worker settlement requirements under the current Immigration Rules.</div>
+  </div>
+
+  <!-- SCENE 3 -->
+  <div class="scene" id="s3">
+    <div class="abs h2" style="left:96px;top:330px;width:860px">For many, the pathway <span class="amber">doubles.</span></div>
+    <svg class="abs" width="1080" height="420" style="left:0;top:560px" id="s3svg">
+      <line x1="110" y1="190" x2="930" y2="190" stroke="#3A5480" stroke-width="44" stroke-linecap="round"/>
+      <line id="s3fill5" x1="110" y1="190" x2="110" y2="190" stroke="#E8A53A" stroke-width="44" stroke-linecap="round"/>
+      <line id="s3fill10" x1="110" y1="190" x2="110" y2="190" stroke="#E8A53A" stroke-opacity=".38" stroke-width="44" stroke-linecap="butt"/>
+      <g id="s3ticks" font-family="Inter,Helvetica,Arial,sans-serif" font-size="34" fill="#A9B3C6" text-anchor="middle"></g>
+      <g id="s3flag">
+        <line x1="0" y1="160" x2="0" y2="40" stroke="#F6F1E6" stroke-width="5"/>
+        <path d="M0 40 h-150 l22 26 l-22 26 h150z" fill="#F6F1E6"/>
+        <text x="-108" y="78" font-family="Inter,Helvetica,Arial,sans-serif" font-weight="700" font-size="30" fill="#0E1C36">Apply</text>
+      </g>
+    </svg>
+    <div class="abs body" id="s3a" style="left:96px;top:960px;width:880px"><span class="amber"><b>Was:</b></span> 5 years to apply</div>
+    <div class="abs body" id="s3b" style="left:96px;top:1035px;width:880px"><b>Announced:</b> 10-year standard pathway; shorter for some</div>
+    <div class="abs" id="s3stamp" style="left:96px;top:1215px"><span class="chip">Announced policy — detailed rules pending</span></div>
+    <div class="abs small" id="s3src" style="left:96px;top:1320px;width:860px">Home Office response, <i>A Fairer Pathway to Settlement</i>, 2&nbsp;Nov&nbsp;2026. Not yet in the Immigration Rules. Targeted transitional protection for some groups only.</div>
+    <div class="abs small" id="s3chk" style="left:96px;top:1470px;color:#F3C778">Information checked: 15 November 2026</div>
+  </div>
+
+  <!-- SCENE 4 -->
+  <div class="scene" id="s4">
+    <div class="abs label muted" style="left:96px;top:340px;width:860px">Migration Advisory Committee estimate</div>
+    <div class="abs serif" id="s4num" style="left:96px;top:420px;font-size:200px;font-weight:600;letter-spacing:-4px;color:var(--amber)">+£689,000</div>
+    <div class="abs body" id="s4lab" style="left:96px;top:680px;width:880px">Modelled average lifetime net fiscal contribution: general Skilled Worker main applicants, <b>excluding Health and Care.</b></div>
+    <div class="abs small" id="s4meta" style="left:96px;top:960px;width:860px">2022/23 arrivals · per person, cohort mean · present value at a 3% real discount rate</div>
+    <div class="abs" id="s4cav" style="left:96px;top:1090px;width:880px">
+      <div class="card" style="padding:34px 40px;border-color:#E8A53A">
+        <div class="label"><b class="amber">A modelled cohort average —</b> not a promise about every person, and not a measure of any settlement policy.</div>
+      </div>
+    </div>
+    <div class="abs small" id="s4src" style="left:96px;top:1420px;width:860px">Source: Migration Advisory Committee, <i>Annual Report 2025</i> (Dec 2025), Table 1.3.</div>
+  </div>
+
+  <!-- SCENE 5 -->
+  <div class="scene" id="s5">
+    <div class="abs h2" style="left:96px;top:330px;width:880px;font-size:72px">Lifetime migration costs <span class="amber">≠</span> savings from delaying ILR.</div>
+    <svg class="abs" width="1080" height="560" style="left:0;top:690px" id="s5svg" font-family="Inter,Helvetica,Arial,sans-serif">
+      <text x="96" y="40" font-size="38" font-weight="700" fill="#F6F1E6">Settlement after 5 years</text>
+      <rect id="s5a1" x="96" y="70" width="0" height="64" rx="10" fill="#3A5480"/>
+      <rect id="s5a2" x="0" y="70" width="0" height="64" rx="10" fill="#E8A53A"/>
+      <text x="96" y="250" font-size="38" font-weight="700" fill="#F6F1E6">Settlement after 10 years</text>
+      <rect id="s5b1" x="96" y="280" width="0" height="64" rx="10" fill="#3A5480"/>
+      <rect id="s5b2" x="0" y="280" width="0" height="64" rx="10" fill="#E8A53A"/>
+      <g id="s5legend" font-size="30" fill="#A9B3C6">
+        <rect x="96" y="490" width="34" height="34" rx="6" fill="#3A5480"/><text x="144" y="518">Sponsored visa</text>
+        <rect x="420" y="490" width="34" height="34" rx="6" fill="#E8A53A"/><text x="468" y="518">Settled (ILR)</text>
+      </g>
+      <g id="s5q">
+        <path d="M428 360 v22 h330 v-22" fill="none" stroke="#F3C778" stroke-width="4"/>
+        <text x="593" y="446" text-anchor="middle" font-size="56" font-weight="700" fill="#F3C778">?</text>
+      </g>
+      <text id="s5ax0" x="96" y="182" font-size="28" fill="#A9B3C6">Year 0</text>
+      <text id="s5ax5" x="428" y="182" font-size="28" fill="#A9B3C6" text-anchor="middle">5</text>
+      <text id="s5ax10" x="758" y="182" font-size="28" fill="#A9B3C6" text-anchor="middle">10</text>
+    </svg>
+    <div class="abs" id="s5chips" style="left:96px;top:1260px;width:880px;display:flex;flex-wrap:wrap;gap:20px"></div>
+    <div class="abs small" id="s5note" style="left:96px;top:1470px;width:840px">Illustrative, not to scale. The Home Office response lists these effects; its full impact assessment has not yet been published.</div>
+  </div>
+
+  <!-- SCENE 6 -->
+  <div class="scene" id="s6">
+    <div class="abs h1" id="s6a" style="left:96px;top:330px;width:880px;font-size:96px">Publish the full evidence.</div>
+    <div class="abs h1 amber" id="s6b" style="left:96px;top:560px;width:880px;font-size:96px">Protect existing pathways.</div>
+    <div id="s6list"></div>
+  </div>
+
+  <!-- SCENE 7 -->
+  <div class="scene" id="s7">
+    <svg class="abs" width="1080" height="200" style="left:0;top:470px" id="s7svg">
+      <line x1="160" y1="100" x2="920" y2="100" stroke="#3A5480" stroke-width="8" stroke-linecap="round"/>
+      <line id="s7fill" x1="160" y1="100" x2="160" y2="100" stroke="#E8A53A" stroke-width="8" stroke-linecap="round"/>
+      <g id="s7dots"></g>
+    </svg>
+    <div class="abs h1" id="s7a" style="left:96px;top:760px;width:880px;text-align:center">We followed the rules.</div>
+    <div class="abs h1 amber" id="s7b" style="left:96px;top:1010px;width:880px;text-align:center">Let us complete the pathway.</div>
+    <div class="abs small" id="s7f" style="left:96px;top:1420px;width:880px;text-align:center">Sources and policy date in caption.</div>
+  </div>
+
+  <div id="cap" class="abs"><span id="captext"></span></div>
+</div></div>
+
+<div id="hint">Presentation mode: press <b>F</b> or <b>Esc</b> to exit · <b>Space</b> play/pause · <b>R</b> restart</div>
+<div id="ui">
+  <button id="bPlay">▶ Play</button>
+  <button id="bRestart">⟲ Restart</button>
+  <input id="scrub" type="range" min="0" max="75" step="0.01" value="0" aria-label="Scrub timeline">
+  <span id="time">0.0 / 75.0</span>
+  <label><input type="checkbox" id="cVoice"> Guide voice</label>
+  <label><input type="checkbox" id="cCap"> Captions</label>
+  <button id="bPresent">⛶ Present</button>
+</div>
+<audio id="vo" preload="auto" src="__VO_SRC__"></audio>
+
+<script>
+(function(){
+const DUR = 75;
+const $ = id => document.getElementById(id);
+const clamp = (x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const ease = x => { x=clamp(x); return x<.5 ? 4*x*x*x : 1-Math.pow(-2*x+2,3)/2; };
+const eout = x => { x=clamp(x); return 1-Math.pow(1-x,3); };
+const p = (t,a,b) => clamp((t-a)/(b-a));               // linear progress
+const fade = (t,a,b,d=.6) => eout(p(t,a,a+d)) * (1-eout(p(t,b-d,b))); // in at a, out by b
+const reveal = (el,t,a,dy=40,d=.7) => { const k=eout(p(t,a,a+d)); el.style.opacity=k; el.style.transform=`translateY(${(1-k)*dy}px)`; return k; };
+const NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent&&parent.appendChild(e);return e;};
+
+// Scene windows (seconds)
+const S = [[0,8],[8,20],[20,31],[31,45],[45,59],[59,69],[69,75.01]];
+
+// Captions (match voiceover timing)
+const CAPS = [
+ [0.6,3.6,"Five years never guaranteed settlement."],
+ [3.6,7.3,"It meant we could apply — if we met the requirements."],
+ [9.0,16.8,"We already had to meet residence, salary, sponsorship and suitability rules, and demonstrate English and knowledge of life in the UK."],
+ [21.0,28.4,"Now, many existing migrants face a longer pathway, after building their careers and family plans around the published rules."],
+ [31.6,38.6,"The Migration Advisory Committee estimated a positive lifetime fiscal contribution for general Skilled Worker main applicants."],
+ [38.6,44.5,"That is a modelled cohort average. Not a promise about every person."],
+ [46.0,51.0,"The real question is what changes when the same people must wait another five years."],
+ [51.0,55.9,"That needs evidence on earnings, public spending, job mobility and people leaving."],
+ [59.8,68.2,"Publish the full impact assessment. Explain the alternatives. Give everyone already on a five-year route fair transitional protection."],
+ [69.8,73.4,"We followed the rules. Let us complete the pathway."]
+];
+
+/* ---------- build dynamic parts ---------- */
+// S1 ticks
+const s1t=$('s1ticks'); const s1x=i=>130+i*156;
+const s1dots=[],s1lbl=[];
+for(let i=1;i<=5;i++){
+  const g=mk('g',{},s1t);
+  s1dots.push(mk('circle',{cx:s1x(i),cy:200,r:22,fill:i===5?'#E8A53A':'#F6F1E6'},g));
+  const tx=mk('text',{x:s1x(i),y:290,'text-anchor':'middle','font-size':34,'font-family':'Inter,Helvetica,Arial,sans-serif',fill:'#A9B3C6'},g);
+  tx.textContent='Year '+i; s1lbl.push(tx);
+}
+const s1apply=mk('text',{x:s1x(5),y:120,'text-anchor':'middle','font-size':38,'font-weight':700,'font-family':'Inter,Helvetica,Arial,sans-serif',fill:'#F3C778'},s1t);
+s1apply.textContent='Can apply';
+
+// S2 requirement rows
+const REQ=[
+ ['Qualifying residence','cal'],
+ ['Salary and continuing sponsorship','pound'],
+ ['Suitability checks','shield'],
+ ['English and Life in the UK','book']
+];
+const ICON={
+ cal:'<rect x="8" y="14" width="64" height="58" rx="8" fill="none" stroke="#F6F1E6" stroke-width="5"/><line x1="8" y1="32" x2="72" y2="32" stroke="#F6F1E6" stroke-width="5"/><line x1="24" y1="6" x2="24" y2="20" stroke="#F6F1E6" stroke-width="5" stroke-linecap="round"/><line x1="56" y1="6" x2="56" y2="20" stroke="#F6F1E6" stroke-width="5" stroke-linecap="round"/><text x="40" y="62" text-anchor="middle" font-family="Inter,Arial" font-weight="700" font-size="24" fill="#F6F1E6">5</text>',
+ pound:'<circle cx="40" cy="40" r="32" fill="none" stroke="#F6F1E6" stroke-width="5"/><text x="40" y="54" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="40" fill="#F6F1E6">£</text>',
+ shield:'<path d="M40 6 L70 18 V40 C70 58 56 70 40 76 C24 70 10 58 10 40 V18 Z" fill="none" stroke="#F6F1E6" stroke-width="5" stroke-linejoin="round"/><path d="M27 41 l9 9 l17 -19" fill="none" stroke="#F6F1E6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>',
+ book:'<path d="M40 18 C30 10 16 10 6 14 V68 C16 64 30 64 40 72 C50 64 64 64 74 68 V14 C64 10 50 10 40 18 Z" fill="none" stroke="#F6F1E6" stroke-width="5" stroke-linejoin="round"/><line x1="40" y1="18" x2="40" y2="72" stroke="#F6F1E6" stroke-width="5"/>'
+};
+const s2rows=[], s2chk=[];
+REQ.forEach((r,i)=>{
+  const d=document.createElement('div');
+  d.className='abs card'; d.style.cssText=`left:96px;top:${600+i*215}px;width:888px;height:180px;display:flex;align-items:center;gap:34px;padding:0 40px`;
+  d.innerHTML=`<svg width="80" height="80" viewBox="0 0 80 80">${ICON[r[1]]}</svg><div class="body" style="flex:1;font-weight:600">${r[0]}</div><svg width="64" height="64"><circle cx="32" cy="32" r="29" fill="#E8A53A"/><path class="ck" d="M18 33 l9 9 l19 -20" fill="none" stroke="#0E1C36" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="50" stroke-dashoffset="50"/></svg>`;
+  $('s2').appendChild(d); s2rows.push(d); s2chk.push(d.querySelector('.ck'));
+});
+
+// S3 ticks (scale 0..10 years across 110..930)
+const s3X = y => 110 + y*82;
+const s3t=$('s3ticks'); const s3tick=[];
+for(let y=0;y<=10;y++){
+  const tx=mk('text',{x:s3X(y),y:270},s3t); tx.textContent=y; s3tick.push(tx);
+}
+
+// S5 chips
+const CH=['Earnings?','Public spending?','Job mobility?','People leaving?'];
+const s5chips=CH.map(c=>{const s=document.createElement('span');s.className='chip';s.textContent=c;$('s5chips').appendChild(s);return s;});
+
+// S6 asks
+const ASK=['Publish the full impact assessment','Explain the alternatives','Fair transitional protection for everyone already on a five-year route'];
+const s6rows=ASK.map((a,i)=>{
+  const d=document.createElement('div'); d.className='abs';
+  d.style.cssText=`left:96px;top:${860+i*190}px;width:888px;display:flex;gap:30px;align-items:flex-start`;
+  d.innerHTML=`<div class="serif" style="flex:none;width:76px;height:76px;border-radius:50%;background:#E8A53A;color:#0E1C36;font-size:46px;font-weight:700;display:flex;align-items:center;justify-content:center">${i+1}</div><div class="body" style="padding-top:6px">${a}</div>`;
+  $('s6').appendChild(d); return d;
+});
+
+// S7 dots
+const s7d=[]; for(let i=0;i<=5;i++){ s7d.push(mk('circle',{cx:160+i*152,cy:100,r:i===5?30:18,fill:'#3A5480'},$('s7dots'))); }
+
+/* ---------- render(t): fully deterministic ---------- */
+function render(t){
+  // scene opacity with crossfade
+  S.forEach(([a,b],i)=>{ const el=$('s'+(i+1)); el.style.opacity = fade(t, i===0?a-1:a, b+0.35, 0.5); el.style.visibility = (t>=a-0.6 && t<=b+0.4)?'visible':'hidden'; });
+  $('progfill').style.width=(clamp(t/DUR)*100)+'%';
+
+  // S1
+  reveal($('s1h'),t,0.15,40,.9);
+  const ln=ease(p(t,0.8,2.6)); $('s1line').setAttribute('x2',130+(910-130)*ln);
+  s1dots.forEach((c,i)=>{ const k=eout(p(t,1.0+i*.32,1.35+i*.32)); c.setAttribute('r',(i===4?26:20)*k); s1lbl[i].style.opacity=k; });
+  s1apply.style.opacity=eout(p(t,2.9,3.4));
+  // timeline collapses upward into checklist
+  const col=ease(p(t,4.2,5.2));
+  $('s1tl').style.transform=`translateY(${-col*80}px) scale(${1-col*.12})`; $('s1tl').style.transformOrigin='540px 200px';
+  $('s1tl').style.opacity=1-col*.55;
+  reveal($('s1card'),t,4.4,60,.8);
+  $('s1chk').setAttribute('stroke-dashoffset',60*(1-eout(p(t,5.0,5.6))));
+  reveal($('s1r2'),t,5.6,20,.6);
+
+  // S2  (VO 9.0–16.8)
+  const s2at=[9.2,10.9,13.0,14.6];
+  s2rows.forEach((r,i)=>{ reveal(r,t,s2at[i],50,.6); s2chk[i].setAttribute('stroke-dashoffset',50*(1-eout(p(t,s2at[i]+.5,s2at[i]+.9)))); });
+  reveal($('s2note'),t,16.6,20,.6);
+
+  // S3  (VO 21–28.4)
+  const f5=ease(p(t,20.6,22.0)); $('s3fill5').setAttribute('x2', s3X(0)+(s3X(5)-s3X(0))*f5);
+  const ext=ease(p(t,23.6,25.6)); $('s3fill10').setAttribute('x2', s3X(5)+(s3X(10)-s3X(5))*ext);
+  s3tick.forEach((tx,y)=>{ tx.style.opacity = y<=5 ? eout(p(t,20.4+y*.12,20.8+y*.12)) : eout(p(t,23.6+(y-5)*.35,24.0+(y-5)*.35)); });
+  s3tick[5].setAttribute('fill', t<23.6?'#F3C778':'#A9B3C6'); s3tick[10].setAttribute('fill', t>25.4?'#F3C778':'#A9B3C6');
+  const fx = s3X(5)+(s3X(10)-s3X(5))*ext;
+  $('s3flag').setAttribute('transform',`translate(${fx},${(1-eout(p(t,21.6,22.2)))*-30})`); $('s3flag').style.opacity=eout(p(t,21.6,22.2));
+  reveal($('s3a'),t,21.6,20,.6);
+  reveal($('s3b'),t,24.4,20,.6);
+  const st=eout(p(t,25.8,26.4)); $('s3stamp').style.opacity=st; $('s3stamp').style.transform=`scale(${1.12-.12*st})`; $('s3stamp').style.transformOrigin='left center';
+  reveal($('s3src'),t,26.6,20,.6);
+  reveal($('s3chk'),t,28.0,16,.6);
+
+  // S4  (VO 31.6–44.5)
+  const nk=eout(p(t,31.4,32.3)); $('s4num').style.opacity=nk; $('s4num').style.transform=`translateY(${(1-nk)*40}px)`;
+  reveal($('s4lab'),t,32.4,30,.7);
+  reveal($('s4meta'),t,34.6,20,.6);
+  reveal($('s4cav'),t,38.4,30,.7);
+  reveal($('s4src'),t,33.4,16,.6);
+
+  // S5  (VO 46–55.9)
+  const X0=96, Y5=428, Y10=758, END=984;
+  const a=ease(p(t,46.2,47.4)); $('s5a1').setAttribute('width',(Y5-X0)*a);
+  const a2=ease(p(t,47.2,48.4)); $('s5a2').setAttribute('x',Y5); $('s5a2').setAttribute('width',(END-Y5)*a2);
+  const b=ease(p(t,48.0,49.6)); $('s5b1').setAttribute('width',(Y10-X0)*b);
+  const b2=ease(p(t,49.4,50.4)); $('s5b2').setAttribute('x',Y10); $('s5b2').setAttribute('width',(END-Y10)*b2);
+  ['s5ax0','s5ax5','s5ax10','s5legend'].forEach(id=>$(id).style.opacity=eout(p(t,46.4,47.0)));
+  $('s5q').style.opacity=eout(p(t,50.4,51.0));
+  // the "?" sits over the gap on row 1 between 5 and 10 (the comparison zone); reposition text
+  const qs=[51.6,52.5,53.4,54.4];
+  s5chips.forEach((c,i)=>reveal(c,t,qs[i],24,.5));
+  reveal($('s5note'),t,55.6,16,.6);
+
+  // S6  (VO 59.8–68.2)
+  reveal($('s6a'),t,59.2,40,.8);
+  reveal($('s6b'),t,60.0,40,.8);
+  const as=[60.4,62.4,64.0];
+  s6rows.forEach((r,i)=>reveal(r,t,as[i],30,.6));
+
+  // S7  (VO 69.8–73.4)
+  const f7=ease(p(t,69.2,71.6)); $('s7fill').setAttribute('x2',160+(920-160)*f7);
+  s7d.forEach((c,i)=>{ const on = f7*5 >= i-0.01; c.setAttribute('fill', on?'#E8A53A':'#3A5480'); });
+  reveal($('s7a'),t,69.6,40,.8);
+  reveal($('s7b'),t,71.2,40,.8);
+  reveal($('s7f'),t,72.4,16,.6);
+
+  // captions
+  if (capOn){ const c=CAPS.find(c=>t>=c[0]&&t<c[1]); $('captext').textContent=c?c[2]:''; $('cap').style.display=c?'block':'none'; }
+  else $('cap').style.display='none';
+}
+
+/* ---------- playback ---------- */
+let t=0, playing=false, last=0, capOn=false;
+const vo=$('vo'), hasVO = vo.getAttribute('src') && !vo.getAttribute('src').startsWith('__');
+if(!hasVO){ $('cVoice').parentElement.style.display='none'; }
+function fmt(x){return x.toFixed(1)+' / '+DUR.toFixed(1)}
+function draw(){ render(t); $('scrub').value=t; $('time').textContent=fmt(t); }
+function syncVO(){ if(!hasVO) return; if($('cVoice').checked && playing){ if(Math.abs(vo.currentTime-t)>.15) vo.currentTime=t; if(vo.paused) vo.play().catch(()=>{}); } else vo.pause(); }
+function loop(now){
+  if(!playing) return;
+  const dt=(now-last)/1000; last=now;
+  if(hasVO && $('cVoice').checked && !vo.paused){ t=vo.currentTime; } else t+=dt;
+  if(t>=DUR){ t=DUR; setPlay(false); }
+  draw(); requestAnimationFrame(loop);
+}
+function setPlay(on){
+  playing=on; $('bPlay').textContent = on?'❚❚ Pause':'▶ Play';
+  if(on){ if(t>=DUR) t=0; last=performance.now(); requestAnimationFrame(loop); }
+  syncVO();
+}
+$('bPlay').onclick=()=>setPlay(!playing);
+$('bRestart').onclick=()=>{ t=0; draw(); if(hasVO) vo.currentTime=0; setPlay(true); };
+$('scrub').oninput=e=>{ t=+e.target.value; if(hasVO) vo.currentTime=t; draw(); };
+$('cVoice').onchange=()=>{ if(hasVO) vo.currentTime=t; syncVO(); };
+$('cCap').onchange=e=>{ capOn=e.target.checked; draw(); };
+function present(on){
+  document.body.classList.toggle('present',on);
+  if(on && document.documentElement.requestFullscreen && !document.fullscreenElement) document.documentElement.requestFullscreen().catch(()=>{});
+  if(!on && document.fullscreenElement) document.exitFullscreen().catch(()=>{});
+  fit();
+}
+$('bPresent').onclick=()=>{ present(true); t=0; draw(); setTimeout(()=>setPlay(true),800); };
+document.addEventListener('fullscreenchange',()=>{ if(!document.fullscreenElement) { document.body.classList.remove('present'); fit(); } });
+document.addEventListener('keydown',e=>{
+  if(e.code==='Space'){ e.preventDefault(); setPlay(!playing); }
+  else if(e.key==='r'||e.key==='R'){ $('bRestart').onclick(); }
+  else if(e.key==='f'||e.key==='F'){ present(!document.body.classList.contains('present')); }
+  else if(e.key==='Escape'){ present(false); }
+  else if(e.key==='ArrowRight'){ t=Math.min(DUR,t+2); if(hasVO) vo.currentTime=t; draw(); }
+  else if(e.key==='ArrowLeft'){ t=Math.max(0,t-2); if(hasVO) vo.currentTime=t; draw(); }
+});
+
+// scale 1080x1920 stage to fit the window (letterboxed)
+function fit(){
+  const st=$('stage'), pres=document.body.classList.contains('present');
+  const W=innerWidth, H=innerHeight - (pres?0:72);
+  const s=Math.min(W/1080, H/1920);
+  st.style.transform=`scale(${s})`;
+  st.style.left=((W-1080*s)/2)+'px'; st.style.top=((H-1920*s)/2)+'px';
+}
+addEventListener('resize',fit); fit();
+setTimeout(()=>{ $('hint').style.opacity=0; },4000);
+
+// hooks for frame-accurate export
+window.__render = x => { t=x; render(x); };
+window.__setCaptions = on => { capOn=on; };
+window.__DUR = DUR;
+const q=new URLSearchParams(location.search);
+if(q.has('t')) t=+q.get('t');
+if(q.has('captions')) { capOn=true; $('cCap').checked=true; }
+draw();
+})();
+</script>
+</body>
+</html>
